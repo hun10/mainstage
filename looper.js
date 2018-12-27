@@ -19,7 +19,7 @@ var buffer = [];
 
 function HandleMIDI(event) {
   if (event.send) {
-	  var musicInfo = GetTimingInfo();
+    var musicInfo = GetTimingInfo();
 
     if (musicInfo.playing) {
       buffer.push(event);
@@ -33,15 +33,14 @@ function HandleMIDI(event) {
 var wasPlaying = false;
 
 function ProcessMIDI() {
-	var musicInfo = GetTimingInfo();
-	
-	if (wasPlaying && !musicInfo.playing) {
-	buffer = [];
-	MIDI.allNotesOff();
-	}
-	
-	wasPlaying = musicInfo.playing;
+  var musicInfo = GetTimingInfo();
 
+  if (wasPlaying && !musicInfo.playing) {
+    buffer = [];
+    MIDI.allNotesOff();
+  }
+
+  wasPlaying = musicInfo.playing;
   if (musicInfo.playing) {
     buffer.forEach(e => {
       if (e.beatPos < musicInfo.blockEndBeat) {
